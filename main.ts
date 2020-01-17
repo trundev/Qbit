@@ -232,19 +232,12 @@
         serial.writeBuffer(buf);
  }
 
-    let handleCmd: string = "";
     /**
     * Get the handle command.
     */
     function getHandleCmd() {
-        let charStr: string = serial.readString();
-        handleCmd = handleCmd.concat(charStr);
-        let cnt: number = countChar(handleCmd, "$");
-        if (cnt == 0)
-            return;
-        let index = findIndexof(handleCmd, "$", 0);
-        if (index != -1) {
-            let cmd: string = handleCmd.substr(0, index);
+        let cmd: string = serial.readUntil("$");
+        if (cmd.length > 0) {
             if (cmd.charAt(0).compare("C") == 0 && cmd.length == 5)
             {
                 let arg1Int: number = strToNumber(cmd.substr(1,1));
@@ -302,33 +295,8 @@
                 versionFlag = true;
             }   
         }
-        handleCmd = "";
     }
 
-     function findIndexof(src: string,strFind: string,startIndex: number): number
-     {
-         for (let i = startIndex; i < src.length; i++)
-         {
-             if (src.charAt(i).compare(strFind) == 0)
-             {
-                 return i;
-             }    
-         }  
-         return -1;
-     }
- 
-     function countChar(src: string, strFind: string): number {
-         let cnt: number = 0;
-         for (let i = 0; i < src.length; i++)
-         {
-             if (src.charAt(i).compare(strFind) == 0)
-             {
-                 cnt++;
-             }
-         }
-         return cnt;
-    }
-    
     function strToNumber(str: string): number {
         let num: number = 0;
         for (let i = 0; i < str.length; i++)
