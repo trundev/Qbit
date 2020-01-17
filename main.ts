@@ -737,4 +737,16 @@ export function setQbitRunSpeed(speed: number, oriention: OrientionType) {
         cmdStr += "|$";
         return cmdStr;
     }
+
+    /**
+     * Convert the version value to the standard command and send it to the mobile phone.
+     */
+    //% weight=48 blockId=convertVersion block="Convert version %data"
+    //% subcategory=Bluetooth  
+    export function convertVersion(data: number): string {
+        let cmdStr: string = "CMD|10|";
+        cmdStr += data.toString();
+        cmdStr += "|$";
+        return cmdStr;
+    }
 }
