@@ -599,7 +599,7 @@ export function setQbitRunSpeed(speed: number, oriention: OrientionType) {
 
             if (cmdHead == "CMD") {
                 let cmdTypeStr: string = str.substr(4, 2);
-                let cmdType = strToNumber(cmdTypeStr);
+                let cmdType = decStrToNumber(cmdTypeStr);
                 if (cmdType > CmdType.VERSION || cmdType < 0) {
                     return CmdType.NO_COMMAND;
                 }
